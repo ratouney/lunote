@@ -1,0 +1,9 @@
+{
+  "name": "LunoteElectron",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ratouney/lunote.git",
+  "author": "ratouney",
+  "license": "MIT",
+  "private": false
+}

@@ -1,0 +1,10 @@
+{
+  "name": "LunoteBackend",
+  "version": "1.0.0",
+  "description": "The backend for the app",
+  "main": "index.js",
+  "repository": "https://github.com/ratouney/lunote.git",
+  "author": "ratouney",
+  "license": "MIT",
+  "private": false
+}
