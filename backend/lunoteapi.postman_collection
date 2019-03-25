@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "5adee0f2-3be1-410e-917c-7b378c9cdaaa",
+		"name": "Backend API",
+		"description": "Hello there",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text"
+								},
+								{
+									"key": "deviceName",
+									"value": "{{deviceName}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/users/new",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2d40bc68-d4e5-4578-81e1-64f017d27d8b",
+								"exec": [
+									"const host = pm.variables.get(\"host\");",
+									"const username = pm.environment.get(\"username\");",
+									"",
+									"pm.sendRequest(`${host}/users?username=${username}`, function (err, response) {",
+									"    const data = response.json()",
+									"    ",
+									"    pm.environment.set(\"targetId\", data[0]._id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/users/edit/{{targetId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"edit",
+								"{{targetId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit User",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/users/edit/{{userId}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"edit",
+										"{{userId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10-ewWmvLP5eViWGFcThH5K0cqU6uo\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2019 15:24:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cyka\": \"blyat\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/users/remove/{{targetId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"remove",
+								"{{targetId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sessions",
+			"item": [
+				{
+					"name": "List Sessions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/sessions",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Session - Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								},
+								{
+									"key": "deviceName",
+									"value": "{{deviceName}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/sessions/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sessions",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Session - Logout",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/sessions/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sessions",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Timers",
+			"item": [
+				{
+					"name": "Get Timers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{host}}/timers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"timers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Timer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Real",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/timers/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"timers",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Timer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "timerId",
+									"value": "{{targetId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/timers/start",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"timers",
+								"start"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stop timer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "timerId",
+									"value": "{{targetId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/timers/stop",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"timers",
+								"stop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Timer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "timerId",
+									"value": "{{targetId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/timers/delete",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"timers",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e9d11fce-6400-4325-a586-1ec5491b4fad",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a6ae76ee-9c4c-4ff9-a034-2d6029b664bc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "e6b4afee-5d7f-4706-9be9-fa13c50b5fcd",
+			"key": "host",
+			"value": "localhost:4200",
+			"type": "string"
+		}
+	]
+}
