@@ -1,3 +1,12 @@
+# The backend files
 backend/node_modules
+backend/yarn.lock
+
+# Electron app
+
+electron/build
+electron/dist
+electron/yarn.lock
+
 electron/node_modules
 frontend/node_modules
